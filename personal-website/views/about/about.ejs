@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title> <%= title %></title>
+    <meta charset="utf-8"/>
+    <link rel='stylesheet' href='/stylesheets/about_styles.css' media="all"/>
+</head>
+<body>
+    <h1>How to build and deploy this website</h1>
+    <p>&nbsp&nbsp Welcome to the documentation section! </p>
+    <p>
+        &nbsp&nbsp The document is a quick introduction into how to build and deploy this website. <br>
+        &nbsp&nbsp In this document, you will find useful documentation, links as well as examples so you can use them to build your own website.
+        <br/>
+    </p>
+    <p><b>&nbsp&nbsp In this topic: </b></p>
+    <ul>
+        <li><a href="#h2_0">How to build a website using node.js and express </a></li>
+        <li><a href="#h2_1">How to deploy a node.js application to production using Heroku </a></li>
+    </ul>
+
+    <h2 id="h2_0"> <b> How to build a website using Node.js and Express </b></h2>
+        <ul>
+            <li>Install npm and Node.js</li>
+                <ul>
+                    <li><a href="https://www.npmjs.com/get-npm" target="_blank" title="Install npm and Node.js">Install npm and Node.js</a> </li>
+                    <pre>
+After installing, to check version
+> npm -version
+> node -v </pre>
+               </ul>
+
+            <li>Create root folder and make npm init</li>
+                <ul>
+                    <li> > mkdir personal_website</li>
+                    <li> > cd personal_website</li>
+                    <li> > npm init</li>
+
+                    <pre>
+To see the package.json file
+> notepad package.json  // in Windows </pre>
+               </ul>
+
+            <li>Install express-generator</li>
+                <ul>
+                    <li><a href="https://www.npmjs.com/package/express-generator" target="_blank" title="Install express-generator">Install express-generator</a> </li>
+                </ul>
+
+            <li>Using ejs</li>
+                <ul>
+                    <li> > express --view=ejs</li>
+                        <pre>
+Note: we use " > express --view=ejs "
+because we are already in the root folder (in this case "personal_website")
+we don't need to specify a folder again. </pre>
+                </ul>
+
+            <li>npm install</li>
+                <ul>
+                    <li> > npm install</li>
+                        <pre>
+To install all libraries, which are listed in package.json </pre>
+                </ul>
+
+            <li>Run the website at localhost</li>
+                 <ul>
+                      <li> > npm run start</li>
+                        <pre>
+Open a browser and go to  http://localhost:3000  </pre>
+                 </ul>
+
+            <li>For more information, refer to <br> <a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/skeleton_website" target="_blank"
+                   title="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/skeleton_website">
+                https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/skeleton_website</a> </li>
+        </ul>
+
+    <h2 id="h2_1"><b>How to deploy a Node.js application to production using Heroku </b></h2>
+    <ul>
+        <li>Heroku and Github</li>
+            <ul>
+                <li><a href="https://github.com/" target="_blank" title="Setup a github account">Setup a github account</a> </li>
+                <li><a href="https://www.heroku.com/" target="_blank" title="Setupt a Heroku account">Setupt a Heroku account</a> </li>
+                <li> <a href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install" target="_blank" title="Install Heroku CLI"> Downoad and Install Heroku CLI </a> <br> </li>
+                <li><a href="https://git-scm.com/" target="_blank" title="Download and install version control with Git">Download and install version control with Git</a> </li>
+                    <pre>
+Note: If you are installing git in Windows, you need to check the option for git bash.
+Below is some basic git command lines
+> git --version
+> git init               // to set up a new repository
+> notepad .gitignore     // add content node_modules/ to ignore all node_modules files
+> git status             // to check the current status
+> git add .              // to add all folders and files into the repository
+> git add routes/        // to add all files in routers into the repository
+> git add app.js         // to add app.js into the repository
+> git commit -m "content of comment"
+> git push               // push to github
+> git remote             // list all remote such as heroku and origin
+> git push heroku master // to push into heroku</pre>
+            </ul>
+        <li>SSH (Secured Shell) Keys</li>
+        Note: In Windows, you need to use Git Bash
+            <ul>
+                <li>To generate a SSH key pairs</li>
+                    <pre>
+$ ssh-keygen -t rsa -b 4096 -C "tuantla80@gmail.com"
+    -t for type
+    rsa protocol;
+    -b for bit (how many bits)
+    4096 bits for the key
+    -C (captical c) for comment. In this case, comment is "tuantla80@gmail.com" </pre>
+
+                <li>To check the content after generating</li>
+                    <pre>
+$dir .ssh          // in Windows
+$ls -a -l ~/.ssh   // in Mac or Linux
+Output: id_rsa file (a secret and keep in local machine and not share to anyone)
+        id_rsa.pub file (public file and can share with Github and Heroku) </pre>
+                <li>To set up SSH agent</li>
+                    <pre>
+$ eval $(ssh-agent -s)    // in Windows
+$eval "$(ssh-agent -s)"   // in Mac and Linux.
+Output: Agent pid 7996    // meaning everything is working well.
+
+$ssh-add .ssh/id_rsa      // in Windows
+$ssh-add -K ~/.ssh/id_rsa // in Mac
+Output: Identity added: .ssh/id_rsa (.ssh/id_rsa) </pre>
+    </ul>
+        <li>Pushing code to Github</li>
+            <ul>
+                <li>Create a new repository in github website</li>
+                    <pre>
+At github website, choose "new repository" -->
+                   choose project title, etc -->
+                   choose "Create reposistory"
+We will use "..or push an existing repository from the command line" and will use the below command lines
+    git remote add origin https://github.com/tuantla80/personal-website.git
+    git push -u origin master </pre>
+                 <li>Make a title and push new SSH key</li>
+                    <pre>
+At github website, go to Profile section -->
+                   Setting -->
+                   SSH and GPC keys -->
+                   Choose "New SSH key"
+Title: app-personal-website  // for example
+
+Input key:
+$ notepad .ssh/id_rsa.pub   // in Windows (Git Bash)
+$cat ~/.ssh/id_rsa.pub      // in Mac
+Copy all the content and paste to SSH key in github. </pre>
+                <li>To test SSH connection</li>
+                    <pre>
+$ ssh -T git@github.com   // Mac or Windows (Git Bash)
+The authenticity of host 'github.com (192.30.255.112)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,192.30.255.112' (RSA) to the list of known hosts.
+Hi tuantla80! You've successfully authenticated, but GitHub does not provide shell access. </pre>
+                <li>Implement two above-mentioned command lines to push code into github</li>
+                    <pre>
+> git remote add origin https://github.com/tuantla80/personal-website.git
+> git push -u origin master </pre>
+            </ul>
+
+        <li>Deploying node.js to Heroku using Heroku CLI</li>
+            <ul>
+                <li>heroku keys:add</li>
+                    <pre>
+- At the root folder (in this case, personal_website):
+
+personal_website> heroku keys:add
+
+    Found an SSH public key at C:\Users\tuantla\.ssh\id_rsa.pub
+    ? Would you like to upload it to Heroku? Yes
+    Uploading C:\Users\tuantla\.ssh\id_rsa.pub SSH key... done </pre>
+                <li>heroku create name_of_project</li>
+                    <pre>
+- At root folder:
+
+personal_website> heroku create tuantla  // name_of_project need to be unique in heroku
+
+    Creating ⬢ tuantla... done
+    https://tuantla.herokuapp.com/ | https://git.heroku.com/tuantla.git </pre>
+                <li>> git push heroku master</li>
+            </ul>
+    <br/>
+    <div class="footer">
+        <div class="footerInner">
+            &copy;TRAN LE ANH TUAN Website. Last update: 2019-03-24 <br/>
+        </div>
+    </div>
+</body>
+</html>
