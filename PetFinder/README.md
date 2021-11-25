@@ -1,2 +1,2 @@
 # PetFinder
-Predict the popularity of shelter pet photos
+To predict the popularity of shelter pet photos
